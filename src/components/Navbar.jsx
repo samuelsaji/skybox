@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import GlassSurface from './GlassSurface'
 
 export default function Navbar({ activeSection }) {
   const [scrolled, setScrolled] = useState(false)
@@ -13,7 +14,7 @@ export default function Navbar({ activeSection }) {
   }, [])
 
   const navLinks = [
-    { id: 'about', label: 'About' },
+    { id: 'about', label: 'About Us' },
     { id: 'achievements', label: 'Services' },
     { id: 'contact', label: 'Contact' },
   ]
@@ -36,7 +37,16 @@ export default function Navbar({ activeSection }) {
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       className={`site-header ${scrolled ? 'site-header-scrolled' : ''}`}
     >
-      <div className="navbar-pill">
+      <GlassSurface
+        className="navbar-pill"
+        width="65%"
+        height="auto"
+        borderRadius={9999}
+        backgroundOpacity={0.7}
+        brightness={20}
+        blur={15}
+        saturation={1.5}
+      >
         <div className="navbar-left">
           <a href="#hero" onClick={(e) => handleClick(e, 'hero')} className="brand-mark">
             <span className="brand-logo-bars">
@@ -45,7 +55,7 @@ export default function Navbar({ activeSection }) {
             <span style={{ marginLeft: '10px', fontWeight: 600, letterSpacing: '-0.02em' }}>SkyBox</span>
           </a>
         </div>
-        
+
         <nav className="navbar-right">
           <ul className="nav-links">
             {navLinks.map((link) => (
@@ -61,7 +71,7 @@ export default function Navbar({ activeSection }) {
             ))}
           </ul>
         </nav>
-      </div>
+      </GlassSurface>
     </motion.header>
   )
 }

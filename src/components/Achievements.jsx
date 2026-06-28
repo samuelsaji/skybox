@@ -1,20 +1,26 @@
 import { motion } from 'framer-motion'
+import workflowAutomationImg from '../images/workflow_automation.svg'
+import onboardingSpeedImg from '../images/onboarding_speed.svg'
+import collaborationSuccessImg from '../images/collaboration_success.svg'
 
 const achievementsData = [
   {
     metric: '500+',
     title: 'enterprise workflows launched',
     desc: 'Trusted by teams that need dependable automation at scale.',
+    image: workflowAutomationImg,
   },
   {
     metric: '98%',
     title: 'faster onboarding cycles',
     desc: 'Streamlined handoffs cut complexity and accelerate time to value.',
+    image: onboardingSpeedImg,
   },
   {
     metric: '4.9/5',
     title: 'average partner rating',
     desc: 'A calm, collaborative delivery experience from kickoff to launch.',
+    image: collaborationSuccessImg,
   },
 ]
 
@@ -41,7 +47,11 @@ export default function Achievements() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.8, delay: index * 0.12 }}
+            whileHover={{ y: -16, scale: 1.02, transition: { duration: 0.3, ease: 'easeOut' } }}
           >
+            <div className="card-image-wrapper">
+              <img src={achievement.image} alt={achievement.title} className="card-image" />
+            </div>
             <div className="card-content">
               <div className="metric">{achievement.metric}</div>
               <h3>{achievement.title}</h3>
@@ -53,3 +63,4 @@ export default function Achievements() {
     </section>
   )
 }
+

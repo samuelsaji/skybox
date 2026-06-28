@@ -1,0 +1,30 @@
+<svg width="240" height="160" viewBox="0 0 240 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="240" height="160" rx="16" fill="#FBFBF9"/>
+  
+  <!-- Grid Lines -->
+  <line x1="40" y1="120" x2="200" y2="120" stroke="#E2E2D3" stroke-width="1"/>
+  <line x1="40" y1="90" x2="200" y2="90" stroke="#F1F1EB" stroke-width="1"/>
+  <line x1="40" y1="60" x2="200" y2="60" stroke="#F1F1EB" stroke-width="1"/>
+  <line x1="40" y1="30" x2="200" y2="30" stroke="#F1F1EB" stroke-width="1"/>
+  
+  <!-- Trend Path -->
+  <path d="M40 110C70 105 90 85 110 70C130 55 160 35 200 30" stroke="#FF6B1A" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Area gradient under curve -->
+  <path d="M40 110C70 105 90 85 110 70C130 55 160 35 200 30V120H40V110Z" fill="url(#orange-grad)" opacity="0.08"/>
+  
+  <!-- Dots and Labels -->
+  <circle cx="110" cy="70" r="4" fill="#FF6B1A"/>
+  <circle cx="200" cy="30" r="6" fill="#FF6B1A" stroke="#FFF" stroke-width="2"/>
+  
+  <!-- Speed lines -->
+  <path d="M185 22L195 24" stroke="#FF6B1A" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M190 15L198 20" stroke="#FF6B1A" stroke-width="1.5" stroke-linecap="round"/>
+
+  <defs>
+    <linearGradient id="orange-grad" x1="120" y1="30" x2="120" y2="120" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF6B1A"/>
+      <stop offset="1" stop-color="#FF6B1A" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+</svg>

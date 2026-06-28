@@ -1,0 +1,26 @@
+<svg width="240" height="160" viewBox="0 0 240 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="240" height="160" rx="16" fill="#FBFBF9"/>
+  
+  <!-- Connecting Web/Constellation -->
+  <path d="M50 50L120 40M120 40L190 60M190 60L160 110M160 110L80 120M80 120L50 50M120 40L160 110M80 120L190 60" stroke="#E2E2D3" stroke-width="1.5"/>
+  
+  <!-- Nodes / Stars -->
+  <circle cx="50" cy="50" r="5" fill="#FFF" stroke="#E2E8F0" stroke-width="1.5"/>
+  
+  <circle cx="120" cy="40" r="7" fill="#FF6B1A" stroke="#FFF" stroke-width="2"/>
+  
+  <circle cx="190" cy="60" r="5" fill="#FFF" stroke="#E2E8F0" stroke-width="1.5"/>
+  
+  <circle cx="160" cy="110" r="8" fill="#FF6B1A" fill-opacity="0.1" stroke="#FF6B1A" stroke-width="2"/>
+  <circle cx="160" cy="110" r="3" fill="#FF6B1A"/>
+  
+  <circle cx="80" cy="120" r="6" fill="#FFF" stroke="#E2E8F0" stroke-width="1.5"/>
+  
+  <!-- Rating Stars or Happy face abstract in center -->
+  <g transform="translate(120, 85)">
+    <!-- Badge of trust -->
+    <path d="M0 0H30V15C30 22 22 30 15 34C8 30 0 22 0 15V0Z" fill="#FFF" stroke="#FF6B1A" stroke-width="2" transform="translate(-15, -17)"/>
+    <!-- Checkmark in badge -->
+    <path d="M-5 -2L-1 2L5 -4" stroke="#FF6B1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>
