@@ -1,8 +1,13 @@
 import { motion } from 'framer-motion'
+import DotGrid from './DotGrid'
 
 export default function Hero() {
   return (
     <section id="hero" className="hero-section">
+      <div className="hero-bg-container">
+        <DotGrid className="hero-dotgrid" />
+        <div className="hero-fade-overlay"></div>
+      </div>
       <div className="hero-copy">
         <motion.span
           initial={{ opacity: 0, y: 16 }}

@@ -5,8 +5,6 @@ import Services from './components/Services'
 import Achievements from './components/Achievements'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
-import DotGrid from './components/DotGrid'
-
 function App() {
   const [activeSection, setActiveSection] = useState('hero')
 
@@ -34,9 +32,6 @@ function App() {
 
   return (
     <div style={{ position: 'relative', minHeight: '100vh' }}>
-      <div style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none', background: 'rgba(255,255,255,0.04)' }}>
-        <DotGrid />
-      </div>
       <div style={{ position: 'relative', zIndex: 1 }}>
         <Navbar activeSection={activeSection} />
         <main>
