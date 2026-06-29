@@ -1,14 +1,27 @@
 import { motion } from 'framer-motion'
 
-const pillars = [
-  'Operational visibility across every workflow',
-  'Automation built for high-growth teams',
-  'A measured approach to implementation and scale',
+const features = [
+  {
+    title: 'Universal Cloud Access',
+    desc: 'Securely manage operations via desktop, tablet, or mobile. No local server maintenance required.',
+  },
+  {
+    title: 'Advanced Multi-Filter Search',
+    desc: 'Filter your entire inventory instantly by SKU, batch, storage zone, arrival date, or custom tags.',
+  },
+  {
+    title: 'Automated Stock Tracking',
+    desc: 'Real-time data updates eliminate manual counting errors and trigger automated low-stock alerts.',
+  },
+  {
+    title: 'End-to-End Operation Controls',
+    desc: 'Seamlessly manage receiving, picking, packing, and shipping processes within one centralized dashboard.',
+  },
 ]
 
 export default function Services() {
   return (
-    <section id="about" className="section section-split">
+    <section id="services" className="section section-split">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -16,15 +29,15 @@ export default function Services() {
         transition={{ duration: 0.8 }}
         className="section-intro"
       >
-        <span className="eyebrow">About</span>
-        <h2>Built for operators who want clarity, speed, and control.</h2>
+        <span className="eyebrow">Services</span>
+        <h2>Cloud-Based Warehouse Management Solutions</h2>
         <p>
-          Codescape helps ambitious businesses simplify complex processes with a single operating layer for customer-facing work. From onboarding to renewals, every workflow is designed to be measurable, reliable, and easy to grow.
+          Our software automation platform migrates your entire warehouse workflow into a secure, accessible cloud environment.
         </p>
-        <div className="pill-row">
-          <span className="pill">Revenue operations</span>
-          <span className="pill">Automation design</span>
-          <span className="pill">Strategic enablement</span>
+        <div className="pill-row" style={{ marginTop: '1.5rem' }}>
+          <span className="pill">Cloud Infrastructure</span>
+          <span className="pill">Real-time Sync</span>
+          <span className="pill">B2B Logistics</span>
         </div>
       </motion.div>
 
@@ -36,16 +49,18 @@ export default function Services() {
         className="about-panel"
       >
         <div className="about-panel-card">
-          <h3>Why teams choose us</h3>
-          <ul>
-            {pillars.map((item) => (
-              <li key={item}>{item}</li>
+          <ul style={{ display: 'grid', gap: '1.2rem', listStyle: 'none' }}>
+            {features.map((feature) => (
+              <li key={feature.title} style={{ paddingLeft: '0', position: 'relative' }}>
+                <strong style={{ display: 'block', color: 'var(--text)', fontSize: '1.05rem', marginBottom: '0.2rem' }}>
+                  {feature.title}
+                </strong>
+                <span style={{ color: 'var(--muted)', fontSize: '0.92rem', lineHeight: '1.5' }}>
+                  {feature.desc}
+                </span>
+              </li>
             ))}
           </ul>
-        </div>
-        <div className="about-panel-card accent-card">
-          <span>Launch in weeks, not quarters</span>
-          <strong>From audit to rollout, every engagement is deliberate and pragmatic.</strong>
         </div>
       </motion.div>
     </section>

@@ -15,7 +15,8 @@ export default function Navbar({ activeSection }) {
 
   const navLinks = [
     { id: 'about', label: 'About Us' },
-    { id: 'achievements', label: 'Services' },
+    { id: 'services', label: 'Services' },
+    { id: 'achievements', label: 'Achievements' },
     { id: 'contact', label: 'Contact' },
   ]
 
