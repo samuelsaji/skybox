@@ -1,8 +1,19 @@
 import { motion } from 'framer-motion'
+import DotGrid from './DotGrid'
 
 export default function Hero() {
+  const handleCtaClick = () => {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'hero_cta_click')
+    }
+  }
+
   return (
     <section id="hero" className="hero-section">
+      <div className="hero-bg-container">
+        <DotGrid className="hero-dotgrid" />
+        <div className="hero-fade-overlay"></div>
+      </div>
       <div className="hero-copy">
         <motion.span
           initial={{ opacity: 0, y: 16 }}
@@ -10,21 +21,21 @@ export default function Hero() {
           transition={{ duration: 0.7 }}
           className="eyebrow"
         >
-          B2B automation for modern teams
+          Warehouse Management Software for Modern Supply Chains
         </motion.span>
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.1 }}
         >
-          Turn daily operations into a revenue engine.
+          Automate Your Warehouse Operations in the Cloud.
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.2 }}
         >
-          We help growth-stage companies unify sales, onboarding, and service delivery with elegant automation that scales without the overhead.
+          Enterprise-grade software automation by Codescape. Access, filter, and control your entire inventory from any device, anywhere.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -32,7 +43,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="hero-actions"
         >
-          <a href="#contact" className="btn btn-primary">Book a demo</a>
+          <a href="#contact" className="btn btn-primary" onClick={handleCtaClick}>Request a Custom Demo</a>
           <a href="#about" className="btn btn-secondary">Explore the platform</a>
         </motion.div>
         <motion.div

@@ -4,6 +4,7 @@ export default function Footer() {
       <p>&copy; 2026 Codescape. Built for modern B2B growth.</p>
       <div>
         <a href="#about">About</a>
+        <a href="#services">Services</a>
         <a href="#achievements">Achievements</a>
         <a href="#contact">Contact</a>
       </div>

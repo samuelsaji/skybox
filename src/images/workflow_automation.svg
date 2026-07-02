@@ -1,0 +1,31 @@
+<svg width="240" height="160" viewBox="0 0 240 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Card Background -->
+  <rect width="240" height="160" rx="16" fill="#FBFBF9"/>
+  
+  <!-- Flow Lines -->
+  <path d="M40 80H80" stroke="#E2E2D3" stroke-width="2" stroke-dasharray="4 4"/>
+  <path d="M110 80H160" stroke="#FF6B1A" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M190 80H200" stroke="#E2E2D3" stroke-width="2" stroke-dasharray="4 4"/>
+  <path d="M125 80V120H155" stroke="#E2E2D3" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Nodes -->
+  <!-- Node 1: Input -->
+  <circle cx="40" cy="80" r="8" fill="#FF6B1A" fill-opacity="0.1" stroke="#FF6B1A" stroke-width="2"/>
+  <circle cx="40" cy="80" r="3" fill="#FF6B1A"/>
+  
+  <!-- Node 2: Database / Source -->
+  <rect x="80" y="62" width="30" height="36" rx="6" fill="#FFF" stroke="#E2E8F0" stroke-width="1.5"/>
+  <rect x="86" y="68" width="18" height="4" rx="2" fill="#E2E8F0"/>
+  <rect x="86" y="75" width="18" height="4" rx="2" fill="#E2E8F0"/>
+  <rect x="86" y="82" width="18" height="4" rx="2" fill="#FF6B1A" fill-opacity="0.8"/>
+  
+  <!-- Node 3: Gear / Processing -->
+  <circle cx="175" cy="80" r="15" fill="#FFF" stroke="#FF6B1A" stroke-width="2"/>
+  <!-- Gear teeth representation -->
+  <circle cx="175" cy="80" r="8" fill="none" stroke="#FF6B1A" stroke-width="3" stroke-dasharray="4 2"/>
+  <circle cx="175" cy="80" r="4" fill="#FF6B1A"/>
+
+  <!-- Node 4: Output / API -->
+  <rect x="155" y="105" width="30" height="30" rx="15" fill="#FFF" stroke="#E2E8F0" stroke-width="1.5"/>
+  <path d="M165 120H175M170 115V125" stroke="#718096" stroke-width="1.5" stroke-linecap="round"/>
+</svg>
