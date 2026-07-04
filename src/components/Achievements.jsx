@@ -24,13 +24,26 @@ const achievementsData = [
   },
 ]
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+      delay: i * 0.15,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  }),
+}
+
 export default function Achievements() {
   return (
     <section id="achievements" className="section bg-soft">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-80px' }}
+        viewport={{ once: false, margin: '-60px' }}
         transition={{ duration: 0.8 }}
         className="section-heading"
       >
@@ -43,17 +56,31 @@ export default function Achievements() {
           <motion.article
             key={achievement.title}
             className="card"
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.8, delay: index * 0.12 }}
-            whileHover={{ y: -16, scale: 1.02, transition: { duration: 0.3, ease: 'easeOut' } }}
+            custom={index}
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, margin: '-60px' }}
+            whileHover={{
+              y: -12,
+              scale: 1.02,
+              boxShadow: '0 30px 60px rgba(18, 18, 18, 0.1)',
+              transition: { duration: 0.3, ease: 'easeOut' }
+            }}
           >
             <div className="card-image-wrapper">
               <img src={achievement.image} alt={achievement.title} className="card-image" />
             </div>
             <div className="card-content">
-              <div className="metric">{achievement.metric}</div>
+              <motion.div
+                className="metric"
+                initial={{ scale: 0.8, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: false }}
+                transition={{ duration: 0.5, delay: 0.2 + index * 0.15 }}
+              >
+                {achievement.metric}
+              </motion.div>
               <h3>{achievement.title}</h3>
               <p>{achievement.desc}</p>
             </div>
@@ -63,4 +90,3 @@ export default function Achievements() {
     </section>
   )
 }
-

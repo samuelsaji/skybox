@@ -1,13 +1,21 @@
+import { motion } from 'framer-motion'
+
 export default function Footer() {
   return (
-    <footer className="site-footer">
-      <p>&copy; 2026 Codescape. Built for modern B2B growth.</p>
+    <motion.footer
+      className="site-footer"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: false }}
+      transition={{ duration: 0.6 }}
+    >
+      <p>&copy; 2026 SkyBox. Powered by Codescape.</p>
       <div>
         <a href="#about">About</a>
         <a href="#services">Services</a>
         <a href="#achievements">Achievements</a>
         <a href="#contact">Contact</a>
       </div>
-    </footer>
+    </motion.footer>
   )
 }

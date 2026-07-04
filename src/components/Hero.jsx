@@ -1,20 +1,39 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
-import DotGrid from './DotGrid'
+import heroBg from '../images/hero-bg.jpg'
 
 export default function Hero() {
-  const handleCtaClick = () => {
+  const [formState, setFormState] = useState('idle')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+
+  const handleQuickContact = (e) => {
+    e.preventDefault()
+    setFormState('sending')
+
     if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', 'hero_cta_click')
+      window.gtag('event', 'hero_quick_contact', {
+        event_category: 'lead',
+        event_label: 'hero_quick_contact_form',
+      })
     }
+
+    setTimeout(() => {
+      setFormState('sent')
+      setEmail('')
+      setPhone('')
+      setTimeout(() => setFormState('idle'), 3000)
+    }, 1200)
   }
 
   return (
     <section id="hero" className="hero-section">
       <div className="hero-bg-container">
-        <DotGrid className="hero-dotgrid" />
-        <div className="hero-fade-overlay"></div>
+        <img src={heroBg} alt="Warehouse operations" className="hero-bg-image" />
+        <div className="hero-gradient-overlay"></div>
       </div>
       <div className="hero-copy">
+
         <motion.span
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -23,6 +42,7 @@ export default function Hero() {
         >
           Warehouse Management Software for Modern Supply Chains
         </motion.span>
+
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -30,6 +50,7 @@ export default function Hero() {
         >
           Automate Your Warehouse Operations in the Cloud.
         </motion.h1>
+
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -37,15 +58,7 @@ export default function Hero() {
         >
           Enterprise-grade software automation by Codescape. Access, filter, and control your entire inventory from any device, anywhere.
         </motion.p>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="hero-actions"
-        >
-          <a href="#contact" className="btn btn-primary" onClick={handleCtaClick}>Request a Custom Demo</a>
-          <a href="#about" className="btn btn-secondary">Explore the platform</a>
-        </motion.div>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -70,22 +83,49 @@ export default function Hero() {
       <motion.div
         initial={{ opacity: 0, x: 30 }}
         animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.9, delay: 0.2 }}
-        className="hero-card"
+        transition={{ duration: 0.9, delay: 0.3 }}
+        className="hero-contact-box"
       >
-        <div className="hero-card-top">
+        <div className="hero-contact-box-header">
           <span className="dot" />
-          Live automation overview
+          Get in touch quickly
         </div>
-        <div className="hero-card-body">
-          <div className="mini-pill">AI-assisted workflows</div>
-          <h3>One control center for every revenue-critical operation.</h3>
-          <ul>
-            <li>Instant lead routing</li>
-            <li>Smart onboarding checklists</li>
-            <li>Customer success alerts</li>
-          </ul>
-        </div>
+        <p className="hero-contact-box-subtitle">Leave your details and we'll reach out within 24 hours.</p>
+        <form onSubmit={handleQuickContact} className="hero-contact-form">
+          <div className="input-group">
+            <input
+              type="email"
+              id="hero-email"
+              required
+              placeholder=" "
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <label htmlFor="hero-email">Email Address</label>
+          </div>
+          <div className="input-group">
+            <input
+              type="tel"
+              id="hero-phone"
+              required
+              placeholder=" "
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+            <label htmlFor="hero-phone">Phone Number</label>
+          </div>
+          <button
+            type="submit"
+            className={`submit-btn ${formState}`}
+            disabled={formState === 'sending' || formState === 'sent'}
+          >
+            <span>
+              {formState === 'idle' && 'Get in Touch'}
+              {formState === 'sending' && 'Sending...'}
+              {formState === 'sent' && 'We\'ll be in touch!'}
+            </span>
+          </button>
+        </form>
       </motion.div>
     </section>
   )

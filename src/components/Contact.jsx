@@ -1,10 +1,9 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import DotGrid from './DotGrid'
 
 export default function Contact() {
   const [formState, setFormState] = useState('idle')
-  const [challenge, setChallenge] = useState('')
-  const [isFocused, setIsFocused] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -20,7 +19,6 @@ export default function Contact() {
     setTimeout(() => {
       setFormState('sent')
       e.target.reset()
-      setChallenge('')
 
       setTimeout(() => {
         setFormState('idle')
@@ -29,21 +27,57 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="section">
+    <section id="contact" className="section contact-section-wrapper">
+      {/* DotGrid background */}
+      <div className="contact-dotgrid-bg">
+        <DotGrid
+          dotSize={4}
+          gap={16}
+          baseColor="#d4d0cc"
+          activeColor="#ff6715"
+          proximity={80}
+          speedTrigger={100}
+          shockRadius={90}
+          shockStrength={2.5}
+        />
+      </div>
+
       <motion.div
         className="contact-container"
-        initial={{ opacity: 0, y: 24 }}
+        initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-80px' }}
+        viewport={{ once: false, margin: '-60px' }}
         transition={{ duration: 0.8 }}
       >
         <div className="contact-info">
           <div>
-            <span className="eyebrow">Contact</span>
-            <h2 className="contact-title">Optimize Your Warehouse Workflow</h2>
-            <p className="contact-subtitle">
+            <motion.span
+              className="eyebrow"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: false }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
+              Contact
+            </motion.span>
+            <motion.h2
+              className="contact-title"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+            >
+              Optimize Your Warehouse Workflow
+            </motion.h2>
+            <motion.p
+              className="contact-subtitle"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+            >
               Ready to transition to a scalable cloud ecosystem? Fill out the form below to speak with an automation specialist.
-            </p>
+            </motion.p>
           </div>
           <div className="info-blocks">
             <p>
@@ -53,7 +87,14 @@ export default function Contact() {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="contact-form">
+        <motion.form
+          onSubmit={handleSubmit}
+          className="contact-form"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+        >
           <div className="input-group">
             <input type="text" id="name" required placeholder=" " />
             <label htmlFor="name">Full Name</label>
@@ -66,81 +107,24 @@ export default function Contact() {
             <input type="email" id="email" required placeholder=" " />
             <label htmlFor="email">Work Email</label>
           </div>
-          
-          <div className="input-group" style={{ position: 'relative' }}>
-            <select
-              id="challenge"
-              required
-              value={challenge}
-              onChange={(e) => setChallenge(e.target.value)}
-              onFocus={() => setIsFocused(true)}
-              onBlur={() => setIsFocused(false)}
-              style={{
-                width: '100%',
-                padding: '0.9rem 0',
-                border: 'none',
-                borderBottom: '1px solid var(--border)',
-                background: 'transparent',
-                font: 'inherit',
-                color: 'var(--text)',
-                outline: 'none',
-                cursor: 'pointer',
-                appearance: 'none',
-                borderBottomColor: isFocused ? 'var(--accent)' : 'var(--border)'
-              }}
-            >
-              <option value="" disabled hidden></option>
-              <option value="Inventory Inaccuracy" style={{ background: 'var(--surface)', color: 'var(--text)' }}>Inventory Inaccuracy</option>
-              <option value="Outdated Software" style={{ background: 'var(--surface)', color: 'var(--text)' }}>Outdated Software</option>
-              <option value="Lack of Remote Access" style={{ background: 'var(--surface)', color: 'var(--text)' }}>Lack of Remote Access</option>
-              <option value="Other" style={{ background: 'var(--surface)', color: 'var(--text)' }}>Other</option>
-            </select>
-            <span style={{
-              position: 'absolute',
-              right: '10px',
-              top: '50%',
-              transform: 'translateY(-50%)',
-              pointerEvents: 'none',
-              color: 'var(--muted)',
-              fontSize: '0.8rem'
-            }}>▼</span>
-            <label
-              htmlFor="challenge"
-              style={{
-                position: 'absolute',
-                left: 0,
-                transition: 'all 0.2s ease',
-                pointerEvents: 'none',
-                ...((challenge !== '' || isFocused) ? {
-                  top: '-0.8rem',
-                  fontSize: '0.8rem',
-                  color: isFocused ? 'var(--accent)' : 'var(--muted)'
-                } : {
-                  top: '0.95rem',
-                  fontSize: '1rem',
-                  color: 'var(--muted)'
-                })
-              }}
-            >
-              Primary Operational Challenge
-            </label>
+
+          <div className="input-group">
+            <input type="tel" id="phone" required placeholder=" " />
+            <label htmlFor="phone">Phone Number</label>
           </div>
 
           <button
             type="submit"
             className={`submit-btn ${formState}`}
             disabled={formState === 'sending' || formState === 'sent'}
-            style={{
-              borderColor: isFocused ? 'var(--accent)' : 'initial'
-            }}
           >
             <span>
-              {formState === 'idle' && 'Schedule My Software Demo'}
+              {formState === 'idle' && 'Schedule a Meeting'}
               {formState === 'sending' && 'Sending...'}
               {formState === 'sent' && 'Request received'}
             </span>
           </button>
-        </form>
+        </motion.form>
       </motion.div>
     </section>
   )
