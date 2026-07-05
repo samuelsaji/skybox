@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import heroBg from '../images/hero-bg.jpg'
+import heroBg from '../images/hero-bg3.png'
 
 export default function Hero() {
   const [formState, setFormState] = useState('idle')
@@ -29,7 +29,7 @@ export default function Hero() {
   return (
     <section id="hero" className="hero-section">
       <div className="hero-bg-container">
-        <img src={heroBg} alt="Warehouse operations" className="hero-bg-image" />
+        <img src={heroBg} alt="Warehouse operations" className="hero-bg-image" width={1920} height={1080} fetchPriority="high" decoding="async" />
         <div className="hero-gradient-overlay"></div>
       </div>
       <div className="hero-copy">

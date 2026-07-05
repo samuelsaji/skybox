@@ -69,7 +69,7 @@ export default function Achievements() {
             }}
           >
             <div className="card-image-wrapper">
-              <img src={achievement.image} alt={achievement.title} className="card-image" />
+              <img src={achievement.image} alt={achievement.title} className="card-image" width={250} height={160} loading="lazy" decoding="async" />
             </div>
             <div className="card-content">
               <motion.div

@@ -85,7 +85,7 @@ export default function Services() {
           viewport={{ once: false, margin: '-60px' }}
           transition={{ duration: 0.8, delay: 0.1 }}
         >
-          <img src={service2Img} alt="Automated workflow statistics" className="services-header-image" />
+          <img src={service2Img} alt="Automated workflow statistics" className="services-header-image" width={640} height={400} loading="lazy" decoding="async" />
         </motion.div>
       </div>
 
@@ -97,7 +97,7 @@ export default function Services() {
           viewport={{ once: false, margin: '-60px' }}
           transition={{ duration: 0.8, delay: 0.15 }}
         >
-          <img src={serviceImg} alt="Warehouse management professional" className="services-image" />
+          <img src={serviceImg} alt="Warehouse management professional" className="services-image" width={600} height={480} loading="lazy" decoding="async" />
         </motion.div>
 
         <motion.div

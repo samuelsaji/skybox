@@ -33,7 +33,7 @@ export default function AboutUs() {
         className="about-image-container"
       >
         <div className="about-image-wrapper">
-          <img src={teamImg} alt="Warehouse team and operations" />
+          <img src={teamImg} alt="Warehouse team and operations" width={500} height={375} loading="lazy" decoding="async" />
         </div>
 
         <motion.div
