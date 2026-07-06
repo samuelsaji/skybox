@@ -339,7 +339,7 @@ main,
 }
 
 .hero-copy h1 {
-  font-size: var(--text-5xl);
+  font-size: var(--text-4xl);
   line-height: 1;
   letter-spacing: -0.05em;
   max-width: 600px;
@@ -464,7 +464,7 @@ main,
 .section-intro h2,
 .section-heading h2,
 .contact-title {
-  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-size: clamp(1.75rem, 2.5vw, 2.25rem);
   line-height: 1.1;
   letter-spacing: -0.04em;
   margin-bottom: 1rem;

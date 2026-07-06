@@ -39,7 +39,7 @@ const cardVariants = {
 
 export default function Achievements() {
   return (
-    <section id="achievements" className="section bg-soft">
+    <section id="achievements" className="section bg-soft" style={{ marginBottom: '120px' }}>
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
