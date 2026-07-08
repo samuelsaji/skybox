@@ -909,6 +909,13 @@ main,
   transform: translateY(0);
 }
 
+.contact-error {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #ff6b6b;
+  text-align: center;
+}
+
 /* =============================================
    BUTTONS (kept for compatibility)
    ============================================= */

@@ -4,8 +4,8 @@ import heroBg from '../images/hero-bg3.png'
 
 export default function Hero() {
   const [formState, setFormState] = useState('idle')
-  const [email, setEmail] = useState('')
-  const [phone, setPhone] = useState('')
+  const [name, setName] = useState('')
+  const [contact, setContact] = useState('')
 
   const handleQuickContact = (e) => {
     e.preventDefault()
@@ -18,12 +18,27 @@ export default function Hero() {
       })
     }
 
-    setTimeout(() => {
-      setFormState('sent')
-      setEmail('')
-      setPhone('')
-      setTimeout(() => setFormState('idle'), 3000)
-    }, 1200)
+    const formData = new URLSearchParams()
+    formData.append('source', 'Hero Quick Contact')
+    formData.append('name', name)
+    formData.append('contact', contact)
+
+    const scriptUrl = 'https://script.google.com/macros/s/AKfycbyJfULFfA_IHJ3uz8A5EC2kf2VeVDo3GvUQLQZuI1j7QhPK5-1MTEw-fDvJDZhRtGEpEg/exec'
+
+    fetch(scriptUrl, {
+      method: 'POST',
+      body: formData,
+    }).then((res) => res.json())
+      .then((data) => {
+        console.log('Script response:', data);
+        setFormState('sent')
+        setName('')
+        setContact('')
+        setTimeout(() => setFormState('idle'), 3000)
+      }).catch((error) => {
+        console.error('Error submitting form', error)
+        setFormState('idle')
+      })
   }
 
   return (
@@ -94,25 +109,25 @@ export default function Hero() {
         <form onSubmit={handleQuickContact} className="hero-contact-form">
           <div className="input-group">
             <input
-              type="email"
-              id="hero-email"
+              type="text"
+              id="hero-name"
               required
               placeholder=" "
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
-            <label htmlFor="hero-email">Email Address</label>
+            <label htmlFor="hero-name">Full Name</label>
           </div>
           <div className="input-group">
             <input
-              type="tel"
-              id="hero-phone"
+              type="text"
+              id="hero-contact"
               required
               placeholder=" "
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              value={contact}
+              onChange={(e) => setContact(e.target.value)}
             />
-            <label htmlFor="hero-phone">Phone Number</label>
+            <label htmlFor="hero-contact">Email or Phone Number</label>
           </div>
           <button
             type="submit"
@@ -130,3 +145,4 @@ export default function Hero() {
     </section>
   )
 }
+

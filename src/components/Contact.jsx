@@ -16,14 +16,31 @@ export default function Contact() {
       })
     }
 
-    setTimeout(() => {
-      setFormState('sent')
-      e.target.reset()
+    const formData = new URLSearchParams()
+    formData.append('source', 'Main Contact Form')
+    formData.append('name', e.target.name.value)
+    formData.append('company', e.target.company.value)
+    formData.append('email', e.target.email.value)
+    formData.append('phone', e.target.phone.value)
 
-      setTimeout(() => {
+    const scriptUrl = 'https://script.google.com/macros/s/AKfycbyJfULFfA_IHJ3uz8A5EC2kf2VeVDo3GvUQLQZuI1j7QhPK5-1MTEw-fDvJDZhRtGEpEg/exec'
+
+    fetch(scriptUrl, {
+      method: 'POST',
+      body: formData,
+    }).then((res) => res.json())
+      .then((data) => {
+        console.log('Script response:', data); // will show { result: "error", error: "..." } if it's still failing
+        setFormState('sent')
+        e.target.reset()
+
+        setTimeout(() => {
+          setFormState('idle')
+        }, 3000)
+      }).catch((error) => {
+        console.error('Error submitting form', error)
         setFormState('idle')
-      }, 3000)
-    }, 1200)
+      })
   }
 
   return (
