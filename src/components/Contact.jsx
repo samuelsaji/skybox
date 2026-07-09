@@ -23,8 +23,7 @@ export default function Contact() {
     formData.append('email', e.target.email.value)
     formData.append('phone', e.target.phone.value)
 
-    const scriptUrl = 'https://script.google.com/macros/s/AKfycbyJfULFfA_IHJ3uz8A5EC2kf2VeVDo3GvUQLQZuI1j7QhPK5-1MTEw-fDvJDZhRtGEpEg/exec'
-
+    const scriptUrl = import.meta.env.VITE_APP_GAS_URL;
     fetch(scriptUrl, {
       method: 'POST',
       body: formData,
