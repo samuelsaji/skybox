@@ -28,13 +28,21 @@ export default function Navbar({ activeSection }) {
   const handleClick = (e, id) => {
     e.preventDefault()
     setIsMobileMenuOpen(false)
-    const target = document.getElementById(id)
-    if (target) {
-      window.scrollTo({
-        top: target.offsetTop - 80,
-        behavior: 'smooth',
-      })
-    }
+    
+    // Allow state update to propagate so menu starts closing
+    setTimeout(() => {
+      const target = document.getElementById(id)
+      if (target) {
+        const headerOffset = 80;
+        const elementPosition = target.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - headerOffset;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth',
+        })
+      }
+    }, 50)
   }
 
   return (
