@@ -2,13 +2,45 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import heroBg from '../images/hero-bg3.png'
 
+const sanitizeInput = (input) => {
+  if (typeof input !== 'string') return input;
+  return input.replace(/<[^>]*>?/gm, '').trim(); // Basic strip HTML tags
+}
+
 export default function Hero() {
   const [formState, setFormState] = useState('idle')
   const [name, setName] = useState('')
   const [contact, setContact] = useState('')
+  const [errorMsg, setErrorMsg] = useState('')
+  const [lastSubmitted, setLastSubmitted] = useState(0)
 
   const handleQuickContact = (e) => {
     e.preventDefault()
+    setErrorMsg('')
+
+    // Honeypot check
+    const honeypot = e.target.bot_field?.value;
+    if (honeypot) {
+      setFormState('idle'); // Silently fail for bots
+      return;
+    }
+
+    // Throttle check (30 seconds)
+    const now = Date.now();
+    if (now - lastSubmitted < 30000) {
+      setErrorMsg('Please wait a moment before submitting again.');
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^[\d\s\-\+\(\)]{7,20}$/; // Basic phone format
+
+    if (!emailRegex.test(contact) && !phoneRegex.test(contact)) {
+      setErrorMsg('Please enter a valid email or phone number.')
+      return;
+    }
+
+    setLastSubmitted(now)
     setFormState('sending')
 
     if (typeof window !== 'undefined' && window.gtag) {
@@ -20,8 +52,8 @@ export default function Hero() {
 
     const formData = new URLSearchParams()
     formData.append('source', 'Hero Quick Contact')
-    formData.append('name', name)
-    formData.append('contact', contact)
+    formData.append('name', sanitizeInput(name))
+    formData.append('contact', sanitizeInput(contact))
 
     const scriptUrl = import.meta.env.VITE_APP_GAS_URL;
     fetch(scriptUrl, {
@@ -106,6 +138,11 @@ export default function Hero() {
         </div>
         <p className="hero-contact-box-subtitle">Leave your details and we'll reach out within 24 hours.</p>
         <form onSubmit={handleQuickContact} className="hero-contact-form">
+          {/* Bot protection honeypot */}
+          <div style={{ display: 'none' }} aria-hidden="true">
+            <label htmlFor="bot_field_hero">Don't fill this out</label>
+            <input type="text" id="bot_field_hero" name="bot_field" tabIndex="-1" autoComplete="off" />
+          </div>
           <div className="input-group">
             <input
               type="text"
@@ -128,6 +165,9 @@ export default function Hero() {
             />
             <label htmlFor="hero-contact">Email or Phone Number</label>
           </div>
+          
+          {errorMsg && <div style={{ color: '#ff6715', marginBottom: '1rem', fontSize: '0.9rem' }}>{errorMsg}</div>}
+
           <button
             type="submit"
             className={`submit-btn ${formState}`}

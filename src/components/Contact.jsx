@@ -2,11 +2,51 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import DotGrid from './DotGrid'
 
+const sanitizeInput = (input) => {
+  if (typeof input !== 'string') return input;
+  return input.replace(/<[^>]*>?/gm, '').trim(); // Basic strip HTML tags
+}
+
 export default function Contact() {
   const [formState, setFormState] = useState('idle')
+  const [errorMsg, setErrorMsg] = useState('')
+  const [lastSubmitted, setLastSubmitted] = useState(0)
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    setErrorMsg('')
+
+    // Honeypot check
+    const honeypot = e.target.bot_field?.value;
+    if (honeypot) {
+      setFormState('idle'); // Silently fail for bots
+      return;
+    }
+
+    // Throttle check (30 seconds)
+    const now = Date.now();
+    if (now - lastSubmitted < 30000) {
+      setErrorMsg('Please wait a moment before submitting again.');
+      return;
+    }
+
+    const emailStr = e.target.email.value;
+    const phoneStr = e.target.phone.value;
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^[\d\s\-\+\(\)]{7,20}$/; // Basic phone format
+
+    if (!emailRegex.test(emailStr)) {
+      setErrorMsg('Please enter a valid email address.')
+      return;
+    }
+
+    if (!phoneRegex.test(phoneStr)) {
+      setErrorMsg('Please enter a valid phone number.')
+      return;
+    }
+
+    setLastSubmitted(now)
     setFormState('sending')
 
     if (typeof window !== 'undefined' && window.gtag) {
@@ -18,10 +58,10 @@ export default function Contact() {
 
     const formData = new URLSearchParams()
     formData.append('source', 'Main Contact Form')
-    formData.append('name', e.target.name.value)
-    formData.append('company', e.target.company.value)
-    formData.append('email', e.target.email.value)
-    formData.append('phone', e.target.phone.value)
+    formData.append('name', sanitizeInput(e.target.name.value))
+    formData.append('company', sanitizeInput(e.target.company.value))
+    formData.append('email', sanitizeInput(emailStr))
+    formData.append('phone', sanitizeInput(phoneStr))
 
     const scriptUrl = import.meta.env.VITE_APP_GAS_URL;
     fetch(scriptUrl, {
@@ -111,6 +151,12 @@ export default function Contact() {
           viewport={{ once: false }}
           transition={{ duration: 0.7, delay: 0.3 }}
         >
+          {/* Bot protection honeypot */}
+          <div style={{ display: 'none' }} aria-hidden="true">
+            <label htmlFor="bot_field">Don't fill this out</label>
+            <input type="text" id="bot_field" name="bot_field" tabIndex="-1" autoComplete="off" />
+          </div>
+
           <div className="input-group">
             <input type="text" id="name" required placeholder=" " />
             <label htmlFor="name">Full Name</label>
@@ -128,6 +174,8 @@ export default function Contact() {
             <input type="tel" id="phone" required placeholder=" " />
             <label htmlFor="phone">Phone Number</label>
           </div>
+
+          {errorMsg && <div style={{ color: '#ff6715', marginBottom: '1rem', fontSize: '0.9rem' }}>{errorMsg}</div>}
 
           <button
             type="submit"
