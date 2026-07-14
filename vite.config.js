@@ -5,7 +5,7 @@ import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/',
+  base: '/skybox/',
   build: {
     outDir: 'docs',
     emptyOutDir: true,
