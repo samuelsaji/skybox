@@ -75,7 +75,7 @@ export default function Hero() {
   return (
     <section id="hero" className="hero-section">
       <div className="hero-bg-container">
-        <img src={heroBg} alt="Warehouse operations" className="hero-bg-image" width={1920} height={1080} fetchPriority="high" decoding="async" />
+        <img src={heroBg} alt="Warehouse operations" className="hero-bg-image" width={1920} height={1080} fetchpriority="high" decoding="async" />
         <div className="hero-gradient-overlay"></div>
       </div>
       <div className="hero-copy">

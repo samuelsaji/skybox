@@ -4,4 +4,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://samuelsaji.github.io/skybox/sitemap.xml
+Sitemap: https://your-production-domain.com/sitemap.xml
