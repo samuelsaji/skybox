@@ -1,7 +1,0 @@
-# robots.txt — SkyBox Warehouse Management
-# Update the Sitemap URL with your production domain before deployment.
-
-User-agent: *
-Allow: /
-
-Sitemap: https://samuelsaji.github.io/skybox/sitemap.xml
