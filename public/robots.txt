@@ -4,4 +4,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://your-production-domain.com/sitemap.xml
+Sitemap: https://skyboxautomation.com/sitemap.xml
